@@ -15,3 +15,7 @@
 # Топология
 ![eca523ff-a15d-45bd-9a3f-afb7fb81d438](https://github.com/cotastrophine/demo2024/assets/148868116/c5ae32a9-a995-4bf7-9e46-b6b17f77c55c)
 1640017)
+# Настройка интерфейсов
+$ Расписала ip адреса с помощью команды
+nano /etc/network/interfaces
+что бы узнать ip нужна команда
