@@ -115,6 +115,12 @@ HQ-R
  
 `` netmask 255.255.255.224``
 
+``systemctl restart networking.service``
+# NAT на ISP, HQ-R,BR-R
+Команда которая устанавливает пакеты
+
+``apt install iptables``
+
 
 
  
