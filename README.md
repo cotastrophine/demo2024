@@ -21,7 +21,8 @@
 `` nano /etc/network/interfaces ``
 * ISP:
 
-```auto ens192 
+```
+auto ens192 
   
  iface ens192 inet static 
  
@@ -29,95 +30,109 @@
  
  geteway 10.10.201.254
  
- netmask 255.255.255.0```
+ netmask 255.255.255.0
+```
 
+```
+auto ens224 
 
-``auto ens224 ``
+iface ens224 inet static 
+ 
+address 10.10.0.165
+ 
+ netmask 255.255.255.252
+```
+
+```
+auto ens256 
+
+iface ens256 inet static 
+ 
+address 192.168.0.161
+ 
+netmask 255.255.255.252``
+```
+* HQ-R
+
+```
+auto ens192 
   
-`` iface ens224 inet static ``
+iface ens192 inet static 
  
-`` address 10.10.0.165``
+address 192.168.0.1
  
-`` netmask 255.255.255.252``
+netmask 255.255.255.128
+```
 
 
-``auto ens256 `` 
-
-`` iface ens256 inet static ``
- 
-`` address 192.168.0.161``
- 
-`` netmask 255.255.255.252``
-
-HQ-R
-
-``auto ens192 ``
+```
+auto ens224 
   
-`` iface ens192 inet static ``
+iface ens224 inet static 
  
-`` address 192.168.0.1``
+address 192.168.0.166
  
-`` netmask 255.255.255.128``
-
-
-``auto ens224 ``
-  
-`` iface ens224 inet static ``
+geteway 192.168.0.165
  
-`` address 192.168.0.166``
- 
-`` geteway 192.168.0.165``
- 
-`` netmask 255.255.255.252``
+netmask 255.255.255.252
+```
 
 * BR-R
 
-``auto ens192 ``
+```
+auto ens192 
   
-`` iface ens192 inet static ``
+iface ens192 inet static 
  
-`` address 192.168.0.129``
+address 192.168.0.129
  
-`` netmask 255.255.255.224``
+netmask 255.255.255.224
+```
 
-
-``auto ens224 ``
+```
+auto ens224 
   
-`` iface ens224 inet static ``
- 
-`` address 192.168.0.162``
+iface ens224 inet static
 
-``` geteway 192.168.0.161```
+ address 192.168.0.162
+
+ geteway 192.168.0.161
  
-`` netmask 255.255.255.252``
+ netmask 255.255.255.252
+ ```
 
 * HQ-SRV
 
-``auto ens192 ``
+```
+auto ens192 
   
-`` iface ens192 inet static ``
+iface ens192 inet static 
  
-`` address 192.168.0.2``
+address 192.168.0.2
 
-`` geteway 192.168.0.1``
+geteway 192.168.0.1
  
-`` netmask 255.255.255.128``
+netmask 255.255.255.128
+```
 
 * BR-SRV
 
-``` auto ens192 ```
+```
+auto ens192 
   
-`` iface ens192 inet static ``
+iface ens192 inet static 
  
-`` address 192.168.0.130``
+address 192.168.0.130``
 
-`` geteway 192.168.0.129``
+geteway 192.168.0.129``
  
-`` netmask 255.255.255.224``
+netmask 255.255.255.224``
 
-``systemctl restart networking.service``
+systemctl restart networking.service
+```
+
 # NAT на ISP, HQ-R,BR-R
-Команда которая устанавливает пакеты
+
 
 ``apt install iptables``
 
