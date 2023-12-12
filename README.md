@@ -131,10 +131,104 @@ netmask 255.255.255.224``
 systemctl restart networking.service
 ```
 
-# NAT на ISP, HQ-R,BR-R
+* Сохранила конфигурацию
+```
+Ctrl+S
+```
+* Вышла из конфигурационного файла
+```
+Ctrl+X
+```
+* Перезагрузила сервис работы с сетью
+```
+systemctl restart networking
+```
+## 2. Установка и настройка frr
+* Установила пакет frr
+```
+apt-get install frr
+```
+* Проверила состояние
+```
+systemctl statys frr
+```
+* Вошла в файл конфигурации
+```
+nano /etc/frr/daemons
+```
+* Изменила значение 
+```
+ospf=yes
+```
+* Перезагрузила службу 
+```
+systemctl restart frr
+```
+* Вошла в настройку маршрутизации 
+```
+vtysh
+```
+* Просмотрела ip адреса и их состояние
+```
+show ip interface brief
+```
+* Вошла в конфигурацию терминала 
+```
+conf t
+```
+* Запустила процесс 
+```
+router ospf
+```
+* Добавила интерфейсы 
+```
+network (ip адрес) area 0
+```
+* Просмотрела соседей  
+```
+do show ip ospf neighbor
+```
+* Сохранила конфигурацию  
+```
+copy running-config startup-config
+```
+
+## 3.Установка и настройка DHCP
+* Установила DHCP
+```
+apt update
+``` 
+```
+apt install isc-dhcp-server
+```
+* Вошла в файл настройки
+```
+nano /etc/default/isc-dhcp-server
+```
+* Указала интерфейс который смотрит в сторону сервера
+```
+INTERFACESV4="ens192"
+```
+* Настроила раздачу адресов
+```
+nano /etc/dhcp/dhcpd.conf
+```
+* Пример настройки
+```
+subnet 192.168.0.0 netmask 255.255.255.0 {
+range 192.168.0.10 192.168.0.125;
+option domain-name-servers 8.8.8.8, 8.8.4.4;
+option routers 192.168.0.1;
+}
+```
+* Применила настройку 
+```
+systemctl restart isc-dhcp-server.service
+```
 
 
-``apt install iptables``
+
+
 
 
 
