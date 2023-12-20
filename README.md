@@ -215,10 +215,9 @@ nano /etc/dhcp/dhcpd.conf
 ```
 * Пример настройки
 ```
-subnet 192.168.0.0 netmask 255.255.255.0 {
-range 192.168.0.10 192.168.0.125;
+subnet 192.168.0.0 netmask 255.255.255.128 {
+range 192.168.0.2 192.168.0.126;
 option domain-name-servers 8.8.8.8, 8.8.4.4;
-option routers 192.168.0.1;
 }
 ```
 * Применила настройку 
