@@ -255,9 +255,16 @@ su
 ```
 vim /etc/net/ifaces/default/options
 ```
-
-
-
+* Если таких директорий не существует, то нужно их создать
+```
+mkdir /etc/net/ifaces/ens192
+mkdir /etc/net/ifaces/ens224
+mkdir /etc/net/ifaces/ens256
+```
+* В каждой папке нужно создать файл
+  ```
+touch(mkedit) /etc/net/ifaces/<NAME_INTERFACE>/options
+```
 
 
  
