@@ -236,7 +236,7 @@ sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 # Таблица
 | Имя устройства | Интерфейс | IPv4/IPv6 | Маска/Префикс | Шлюз |
 | ----------- | ----------- | ----------- | ------------ | ----- |
-| ISP         | ens192         | 10.12.34.6 | /24 255.255.255.0 | 10.10.201.254  |
+| ISP         | ens192         | 10.12.34.6 | /24 255.255.255.0 | 10.12.12.254  |
 |           | ens224         | 192.168.0.165 | /30 255.255.255.252 |          |
 |           |  ens256|  192.168.0.161 | /30 255.255.255.252 |          |
 | BR-R        |  ens192        | 192.168.0.129 | /27 255.255.255.224 |        |  
@@ -262,9 +262,20 @@ mkdir /etc/net/ifaces/ens224
 mkdir /etc/net/ifaces/ens256
 ```
 * В каждой папке нужно создать файл
-  ```
-touch(mkedit) /etc/net/ifaces/<NAME_INTERFACE>/options
 ```
-
-
+touch /etc/net/ifaces/<NAME_INTERFACE>/options
+```
+```
+mcedit /etc/net/ifaces/<NAME_INTERFACE>/options
+TYPE=eth
+DISABLED=no
+NM_CONTROLLED=no
+BOOTPROTO=static
+CONFIG_IPV4=yes
+```
+* Для проверки команда
+  ```
+ cat /etc/net/ifaces/<NAME_INTERFACE>/options
+  ```
+  
  
