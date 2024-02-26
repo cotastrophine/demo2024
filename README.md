@@ -247,7 +247,7 @@ sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 | BR-SRV      |     ens160   |192.168.0.130 |  /27 255.255.255.224 | 192.168.0.129 |
 | CLI        |              |              |                  |                |  
 
-это что бы nano
+это что бы nano (только там где пингуется на 8.8.8.8)
 ```
   apt-get update
 apt-get install nano
@@ -259,7 +259,7 @@ su
 ```
 *  Необходимо перейти в конфигурационный файл "/etc/net/ifaces/default/options" и поменять значение "CONFIG_IPV6=no на CONFIG_IPV6=yes
 ```
-nano /etc/net/ifaces/default/options
+nano(vim) /etc/net/ifaces/default/options
 ```
 * Если таких директорий не существует, то нужно их создать
 ```
@@ -283,9 +283,13 @@ CONFIG_IPV4=yes
   ```
  cat /etc/net/ifaces/<NAME_INTERFACE>/options
   ```
-* Назначить ip 
+* Назначить ip
 ```
 nano /etc/net/ifaces/ens_/ipv4address
+```
+* без nano
+```
+mcedit /etc/net/ifaces/ens161/ipv4address
 ```
 * Назначить шлюз
 ```
