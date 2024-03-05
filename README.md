@@ -273,8 +273,6 @@ touch /etc/net/ifaces/<NAME_INTERFACE>/options
 ```
 ```
 mcedit /etc/net/ifaces/<NAME_INTERFACE>/options
-
-
 ```
 * Для проверки команда
   ```
@@ -297,4 +295,13 @@ default via 192.168.0.0
 ```
 mcedit /etc/net/sysctl.conf
 net.ipv4.ip_forward = 1 (поменять 0 на 1)
+```
+# Тунели BR-R HQ-R
+в BR-R HQ-R в эдите меняет то что смотрит на ISP на WM Network и в optionse меняем static на dhcp
+проверяем ping 8.8.8.8
+```
+apt-get update && apt-get install -y NetworkManager-{daemon,tui}
+```
+```
+systemctl enable --now NetworkManager
 ```
