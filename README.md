@@ -247,7 +247,7 @@ sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 | BR-SRV      |    ens160   |192.168.0.130  | /27 255.255.255.224 | 192.168.0.129 |
 | CLI         |             |               |                  |                |  
 
-это что бы nano (только там где пингуется на 8.8.8.8)
+* это что бы nano (только там где пингуется на 8.8.8.8)
 ```
   apt-get update
 apt-get install nano
@@ -258,50 +258,68 @@ apt-get install nano
 su
 ```
 *  Необходимо перейти в конфигурационный файл "/etc/net/ifaces/default/options" и поменять значение "CONFIG_IPV6=no на CONFIG_IPV6=yes
+  
 ```
 nano(vim) /etc/net/ifaces/default/options
 ```
 * Если таких директорий не существует, то нужно их создать
+  
 ```
 mkdir /etc/net/ifaces/ens192
 mkdir /etc/net/ifaces/ens224
 mkdir /etc/net/ifaces/ens256
 ```
+
 * В каждой папке нужно создать файл
+  
 ```
 touch /etc/net/ifaces/<NAME_INTERFACE>/options
 ```
+
 ```
 mcedit /etc/net/ifaces/<NAME_INTERFACE>/options
 ```
+
 * Для проверки команда
+
   ```
  cat /etc/net/ifaces/<NAME_INTERFACE>/options
   ```
+
 * Назначить ip
+
 ```
 nano /etc/net/ifaces/ens_/ipv4address
 ```
+
 * без nano
+
 ```
 mcedit /etc/net/ifaces/ens161/ipv4address
 ```
+
 * Назначить шлюз
+
 ```
 nano /etc/net/ifaces/ens192/ipv4route
 default via 192.168.0.0
 ```
+
 * В ISP, BR-R, HQ-R настрить маршрутизацию
+
 ```
 mcedit /etc/net/sysctl.conf
 net.ipv4.ip_forward = 1 (поменять 0 на 1)
 ```
+
 # Тунели BR-R HQ-R
-в BR-R HQ-R в эдите меняет то что смотрит на ISP на WM Network и в optionse меняем static на dhcp
+* в BR-R HQ-R в эдите меняет то что смотрит на ISP на WM Network и в optionse меняем static на dhcp
 проверяем ping 8.8.8.8
+
 ```
 apt-get update && apt-get install -y NetworkManager-{daemon,tui}
 ```
+
 ```
 systemctl enable --now NetworkManager
 ```
