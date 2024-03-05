@@ -282,9 +282,9 @@ mcedit /etc/net/ifaces/<NAME_INTERFACE>/options
 
 * Для проверки команда
 
-  ```
- cat /etc/net/ifaces/<NAME_INTERFACE>/options
-  ```
+```
+cat /etc/net/ifaces/<NAME_INTERFACE>/options
+```
 
 * Назначить ip
 
