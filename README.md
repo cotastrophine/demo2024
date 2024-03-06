@@ -334,7 +334,40 @@ sed -i "s/NM_CONTROLLED=no/NM_CONTROLLED=yes/g" /etc/net/ifaces/ens33/options
 systemctl restart network
 systemctl restart NetworkManager
 ```
-там много что дальше у даниса есть
+```
+nmtui
+```
+![](https://github.com/Danis3124234/Demo2024/blob/main/1.png)
+![](https://github.com/Danis3124234/Demo2024/blob/main/2.png)
+```
+Родительский 192.168.0.166
+Локальный 192.168.0.162
+Маска /30
+```
+![](https://github.com/Danis3124234/Demo2024/blob/main/3.png)
+```
+Родительский 192.168.0.162
+Локальный 192.168.0.166
+Маска /30
+```
+### Для BQ-R
+
+```
+nmcli connection modify BR-R ip-tunnel.ttl 64
+```
+
+```
+ip r add 192.168.0.0/25 dev gre1
+```
+### Для HQ-R
+
+```
+nmcli connection modify HQ-R ip-tunnel.ttl 64
+```
+
+```
+ip r add 192.168.0.128/27 dev gre1
+```
 
 # Настройка динамической (внутренней) маршрутизации средствами frr
   опять надо в инет зайти поменять на dhcp и WM Network
