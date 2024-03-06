@@ -312,7 +312,7 @@ mcedit /etc/net/sysctl.conf
 net.ipv4.ip_forward = 1 (поменять 0 на 1)
 ```
 
-# Тунели BR-R HQ-R
+# Утилита nmtui Тунели BR-R HQ-R
 * в BR-R HQ-R в эдите меняет то что смотрит на ISP на WM Network и в optionse меняем static на dhcp
 проверяем ping 8.8.8.8
 
@@ -322,4 +322,50 @@ apt-get update && apt-get install -y NetworkManager-{daemon,tui}
 
 ```
 systemctl enable --now NetworkManager
+```
+
+```
+sed -i "s/NM_CONTROLLED=no/NM_CONTROLLED=yes/g" /etc/net/ifaces/ens33/options
+```
+
+* Перезапускаем службы "network" и "NetworkManager":
+
+```
+systemctl restart network
+systemctl restart NetworkManager
+```
+там много что дальше у даниса есть
+
+# Настройка динамической (внутренней) маршрутизации средствами frr
+  опять надо в инет зайти поменять на dhcp и WM Network
+
+```
+apt-get update && apt-get install -y frr
+```
+
+```
+vim /etc/frr/daemons
+```
+* переводим ospfd=no в ospfd=yes 
+* переводим ospf6d=no в ospfd6=yes
+
+```
+systemctl enable --now frr
+```
+
+```
+vtysh
+```
+```
+conf t
+router ospf
+passive- interfaces default
+network 10.0.0.0/30 area 0
+network 192.168.0.128/27 area 0
+exit
+interface tun1
+no ip ospf network broadcast
+no ip ospf passive
+exit
+do wr mem
 ```
