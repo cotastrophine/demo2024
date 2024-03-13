@@ -402,3 +402,63 @@ no ip ospf passive
 exit
 do wr mem
 ```
+
+# Настройте автоматическое распределение IP-адресов на роутере HQ-R
+* Установка DHCP
+```
+apt-get install -y dhcp-server
+```
+
+```
+mcedit /etc/sysconfig/dhcpd 
+```
+
+* Указал интерфейс который смотрит на HQ-SRV
+```
+DHCPDARGS=ens224
+```
+
+```
+nano /etc/dhcp/dhcpd.conf
+```
+
+```
+# dhcp.conf
+
+default-lease-time 6000;
+max-lease-time 72000;
+
+subnet 192.168.0.0 netmask 255.255.255.128 {
+range 192.168.0.10 192.168.0.125;
+option routers 192.168.0.1;
+}
+```
+
+```
+mcedit /etc/dhcp/dhcpd.conf.example
+```
+
+```
+# dhcp.conf
+
+default-lease-time 6000;
+max-lease-time 72000;
+
+subnet 192.168.0.0 netmask 255.255.255.128 {
+range 192.168.0.10 192.168.0.125;
+option routers 192.168.0.1;
+}
+```
+
+```
+systemctl enable --now dhcpd
+```
+
+* потом меняем в HQ-SRV ststic на dhcp и проверяем с командой ip a
+
+
+
+
+
+
+
